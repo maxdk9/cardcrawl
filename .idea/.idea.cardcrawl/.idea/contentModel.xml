@@ -21,6 +21,7 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="PlayerCreationSystem.cs" t="Include" />
           <e p="PlayerData.cs" t="Include" />
         </e>
       </e>
