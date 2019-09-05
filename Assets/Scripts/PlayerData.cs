@@ -34,9 +34,15 @@ public struct ShieldData : IComponentData
 	
 }
 
-public struct CoinData : IComponentData
+public struct CoinsData : IComponentData
 {
 	
+}
+
+
+public struct DealCardsFromDeckData : IComponentData
+{
+	public int Amount;
 }
 
 public struct AbilityData : IComponentData
