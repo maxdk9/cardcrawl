@@ -120,6 +120,8 @@ namespace DefaultNamespace
             inputDeps = jobA.Schedule(inputDeps);
             inputDeps = jobB.Schedule(inputDeps);
             inputDeps = jobC.Schedule(inputDeps);
+            barrier.AddJobHandleForProducer(inputDeps);
+            
             return inputDeps;
 
 
