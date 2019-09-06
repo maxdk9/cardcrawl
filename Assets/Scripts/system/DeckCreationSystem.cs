@@ -80,7 +80,7 @@ namespace DefaultNamespace
             void IJob.Execute()
             {
                 var e = CommandBuffer.CreateEntity();
-                CommandBuffer.AddComponent<>(e,new DealCardsFromDeckData{Amount=4});
+                CommandBuffer.AddComponent(e,new DealCardsFromDeckData{Amount=4});
                 
             }
         }
