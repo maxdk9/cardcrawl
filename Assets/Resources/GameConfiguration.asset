@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1048e0651fcd4004b64e5db6631f091e, type: 3}
+  m_Name: GameConfiguration
+  m_EditorClassIdentifier: 
+  MonsterCardPrefab: {fileID: 4503103286980753106, guid: 013bfed5344fbd04ba5910b5a9a05987,
+    type: 3}
+  SwordCardPrefab: {fileID: 6586449312917416108, guid: 096046e28ce17f24cb30c57edd8ac99c,
+    type: 3}
+  ShieldCardPrefab: {fileID: 6774328532692874879, guid: 9dd6686eb6787b845b6784b2da6ffc08,
+    type: 3}
+  PotionCardPrefab: {fileID: 6739365964701902440, guid: 6e3797e2ee9cad1428d82e42994aa38e,
+    type: 3}
+  CoinsCardPrefab: {fileID: 7729271704893646972, guid: 84437173a3b62bb45a631f9c0a7d02a2,
+    type: 3}
+  AbilityCardPrefab: {fileID: 7021676089136250968, guid: 2794fb1c434a19f4abdb0a3c4befd2b2,
+    type: 3}
+  GameFinishedPopupPrefab: {fileID: 3512680140650132817, guid: 18a4d286e5a23db4faa4923394dfdb34,
+    type: 3}
