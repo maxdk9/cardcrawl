@@ -90,3 +90,8 @@ public enum SlotType
 	Bag,
 	Deck
 }
+
+public struct SellCardData : IComponentData
+{
+	public int Price;
+}

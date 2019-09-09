@@ -14,7 +14,7 @@ public class CardView : MonoBehaviour
     public TextMeshPro StatText;
     public TextMeshPro NameText;
 
-    [HideInInspector] public GameObject slot;
+    [HideInInspector] public GameObject Slot;
 
     [HideInInspector] public bool isDisabled;
 

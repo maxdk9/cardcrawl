@@ -67,7 +67,7 @@ namespace DefaultNamespace
                     break;
         
                 var card = deck[0];
-                var cardView = CreateCardView(card);
+                CardView cardView = CreateCardView(card);
         
                 var cardEntity = cardView.GetComponent<GameObjectEntity>().Entity;
 
@@ -111,9 +111,71 @@ namespace DefaultNamespace
             deckSizeText.text = deckCreationSystem.Deck.Length.ToString();
         }
 
-        private CardView CreateCardView(Entity card)
+        private CardView CreateCardView(Entity cardEntity)
         {
-            throw new System.NotImplementedException();
+            if (EntityManager.HasComponent<MonsterData>(cardEntity))
+            {
+                return CreateCardWithStatView<MonsterData>(gameConfig.MonsterCardPrefab, cardEntity);
+            }
+
+            if (EntityManager.HasComponent<SwordData>(cardEntity))
+            {
+                return CreateCardWithStatView<SwordData>(gameConfig.SwordCardPrefab, cardEntity);
+            }
+            
+            if (EntityManager.HasComponent<ShieldData>(cardEntity))
+            {
+                return CreateCardWithStatView<ShieldData>(gameConfig.ShieldCardPrefab, cardEntity);
+            }
+            
+            if (EntityManager.HasComponent<PotionData>(cardEntity))
+            {
+                return CreateCardWithStatView<PotionData>(gameConfig.PotionCardPrefab, cardEntity);
+            }
+            if (EntityManager.HasComponent<CoinsData>(cardEntity))
+            {
+                return CreateCardWithStatView<CoinsData>(gameConfig.CoinsCardPrefab, cardEntity);
+            }
+            if (EntityManager.HasComponent<AbilityData>(cardEntity))
+            {
+                return CreateAbilityCardView(gameConfig.AbilityCardPrefab, cardEntity);
+            }
+            return null;
+        }
+
+        private CardView CreateAbilityCardView(GameObject prefab, Entity sourceEntity)
+        
+        {
+            var cardGo = Object.Instantiate(prefab);
+            CardView card = cardGo.GetComponent<CardView>();
+            AbilityData sourceAbility = EntityManager.GetComponentData<AbilityData>(sourceEntity);
+            card.SetName(sourceAbility.Type.ToString());
+            var cardEntity = cardGo.GetComponent<GameObjectEntity>().Entity;
+            
+            EntityManager.SetComponentData(cardEntity,new CardData());
+            EntityManager.SetComponentData(cardEntity,sourceAbility);
+
+            return card;
+        }
+
+
+        private CardView CreateCardWithStatView<T>(GameObject prefab, Entity sourceEntity)
+        where T : struct ,IComponentData
+        {
+            var cardGo = Object.Instantiate(prefab);
+
+            CardView card = cardGo.GetComponent<CardView>();
+
+            StatData stat = EntityManager.GetComponentData<StatData>(sourceEntity);
+
+
+            var cardEntity = cardGo.GetComponent<GameObjectEntity>().Entity;
+            EntityManager.AddComponentData(cardEntity,new CardData());
+            
+            EntityManager.AddComponentData(cardEntity,new T());
+            EntityManager.AddComponentData(cardEntity,stat);
+            card.SetStat(stat.Value);
+            return card;
         }
     }
 }
