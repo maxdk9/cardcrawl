@@ -1,4 +1,5 @@
 using System;
+using CCG;
 using DG.Tweening;
 using Unity.Collections;
 using Unity.Entities;
@@ -118,7 +119,7 @@ namespace DefaultNamespace
             }
             if (EntityManager.HasComponent<ShieldData>(entity))
             {
-                ProcessShieldCard(entityGo, slotGo);
+                ProcessShieldCard( slotGo);
             }
             
             if (EntityManager.HasComponent<PotionData>(entity))
@@ -140,9 +141,20 @@ namespace DefaultNamespace
             throw new NotImplementedException();
         }
 
-        private void ProcessShieldCard(GameObject entityGo, GameObject slotGo)
+        private void ProcessShieldCard( GameObject slotGo)
         {
-            throw new NotImplementedException();
+            var slotEntity = slotGo.GetComponent<GameObjectEntity>().Entity;
+            SlotData slotData = EntityManager.GetComponentData<SlotData>(slotEntity);
+            if (slotData.Type != SlotType.Deck &&
+                slotData.Type != SlotType.Player &&
+                slotData.Occupied == 0)
+            {
+                EnterSlot(selectedCard,slotGo);
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
         }
 
         private void ProcessPotionCard(GameObject entityGo, GameObject slotGo)
@@ -155,10 +167,33 @@ namespace DefaultNamespace
             throw new NotImplementedException();
         }
 
-        private void ProcessMonsterCard(GameObject entityGo, GameObject slotGo)
+        private void ProcessMonsterCard(GameObject monsterGo, GameObject slotGo)
         {
-            throw new NotImplementedException();
+            var monsterEntity = monsterGo.GetComponent<GameObjectEntity>().Entity;
+            MonsterData monsterData = EntityManager.GetComponentData<MonsterData>(monsterEntity);
+            var slotEntity = slotGo.GetComponent<GameObjectEntity>().Entity;
+            SlotData slotData = EntityManager.GetComponentData<SlotData>(slotEntity);
+            if (slotData.Type != SlotType.Deck &&
+                slotData.Type != SlotType.Bag &&
+                slotData.Occupied == 1 &&
+                EntityManager.HasComponent<ShieldData>(slotEntity))
+            {
+                EntityManager.AddComponentData(monsterEntity,new ResolveCardInteractionData());
+                EntityManager.AddComponentData(slotData.Entity,new ResolveCardInteractionData());
+            }
+            else if(slotData.Type==SlotType.Player)
+            {
+                EntityManager.AddComponentData(monsterEntity,new ResolvePlayerInteractionData());
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
+               
         }
+        
+        
+        
 
 
         private ValueTuple<RaycastHit, RaycastHit> Raycast(Vector3 origin, Vector3 direction, LayerMask layer1, LayerMask layer2)

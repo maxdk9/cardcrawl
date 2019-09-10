@@ -27,15 +27,28 @@
           </e>
           <e p="Data" t="Include">
             <e p="CardSlotData.cs" t="Include" />
+            <e p="DamagePlayerData.cs" t="Include" />
+            <e p="DirtyData.cs" t="Include" />
+            <e p="GameFinishedData.cs" t="Include" />
+            <e p="HealPlayerData.cs" t="Include" />
             <e p="PlayerData.cs" t="Include" />
+            <e p="PostResolveCardData.cs" t="Include" />
+            <e p="ResolveCardInteractionData.cs" t="Include" />
+            <e p="ResolvePlayerInteractionData.cs" t="Include" />
             <e p="SlotDataProxy.cs" t="Include" />
           </e>
           <e p="system" t="Include">
             <e p="CardCreationSystem.cs" t="Include" />
             <e p="CardDealingSystem.cs" t="Include" />
+            <e p="DamagePlayerSystem.cs" t="Include" />
             <e p="DeckCreationSystem.cs" t="Include" />
+            <e p="HealPlayerSystem.cs" t="Include" />
             <e p="PlayerCreationSystem.cs" t="Include" />
             <e p="PlayerInputSystem.cs" t="Include" />
+            <e p="ResolveMonsterOverPlayerSystem.cs" t="Include" />
+            <e p="ResolveMonsterOverShieldSystem.cs" t="Include" />
+            <e p="ResolvePotionSystem.cs" t="Include" />
+            <e p="ResolveSwordOverMonsterSystem.cs" t="Include" />
           </e>
           <e p="ui" t="Include">
             <e p="CardView.cs" t="Include" />
