@@ -295,5 +295,23 @@ namespace DefaultNamespace
 
             return 0;
         }
+
+        private void ProcessFortifyCard(SlotData slot, Entity abilityEntity, GameObject abilityGo)
+        {
+            if (slot.Type != SlotType.Player && slot.Occupied == 1)
+            {
+                EntityManager.AddComponentData(abilityEntity,new ResolveAbilityFortifyData
+                {
+                    TargetEntity = slot.Entity
+                });
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
+        }
+        
+        
+        
     }
 }
