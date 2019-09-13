@@ -95,3 +95,15 @@ public struct SellCardData : IComponentData
 {
 	public int Price;
 }
+
+
+public struct KillCardData : IComponentData
+{
+	
+}
+
+
+public struct ResolveAbilityFaithData : IComponentData
+{
+	
+}

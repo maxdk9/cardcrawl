@@ -9,6 +9,8 @@ namespace DefaultNamespace
     public class CardDealingSystem : ComponentSystem
     {
         private EntityQuery dealCardsQuery;
+        private EntityQuery resolveFaithQuery;
+        
         private GameBoard gameBoard;
         private TextMeshProUGUI deckSizeText;
         private GameConfiguration gameConfig;
@@ -19,6 +21,10 @@ namespace DefaultNamespace
         protected override void OnCreate()
         {
             dealCardsQuery = GetEntityQuery(ComponentType.ReadOnly<DealCardsFromDeckData>());
+            resolveFaithQuery = GetEntityQuery(ComponentType.ReadOnly<ResolveAbilityFaithData>());
+            
+
+
         }
 
 
@@ -52,7 +58,12 @@ namespace DefaultNamespace
                 amount += data.Amount;
             });
             DealCards(amount);
-
+            
+            Entities.With(resolveFaithQuery).ForEach(entity =>
+            {
+                PostUpdateCommands.DestroyEntity(entity);
+                applyFaith = true;
+            });
 
 
         }
@@ -106,8 +117,9 @@ namespace DefaultNamespace
         
                 deck.RemoveAtSwapBack(0);
                 EntityManager.DestroyEntity(card);
+                
             }
-
+            applyFaith = false;
             deckSizeText.text = deckCreationSystem.Deck.Length.ToString();
         }
 
@@ -168,6 +180,10 @@ namespace DefaultNamespace
 
             StatData stat = EntityManager.GetComponentData<StatData>(sourceEntity);
 
+            if (applyFaith)
+            {
+                stat.Value *= 2;
+            }
 
             var cardEntity = cardGo.GetComponent<GameObjectEntity>().Entity;
             EntityManager.AddComponentData(cardEntity,new CardData());

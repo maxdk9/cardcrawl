@@ -131,10 +131,49 @@ namespace DefaultNamespace
             {
                 ProcessCoinCard(entityGo, slotGo);
             }
-            
-            
+
+            if (EntityManager.HasComponent<AbilityData>(entity))
+            {
+                ProcessAbilityCard(entityGo, slotGo);
+            }
             
         }
+        
+        private void ProcessAbilityCard(GameObject abilityGo, GameObject slotGo)
+        {
+            var abilityEntity = abilityGo.GetComponent<GameObjectEntity>().Entity;
+            var ability = EntityManager.GetComponentData<AbilityData>(abilityEntity);
+            
+            var slotEntity = slotGo.GetComponent<GameObjectEntity>().Entity;
+            var slot = EntityManager.GetComponentData<SlotData>(slotEntity);
+            if (slot.Type != SlotType.Deck &&
+                slot.Type != SlotType.Player &&
+                slot.Occupied == 0)
+            {
+                EnterSlot(selectedCard, slotGo);
+            }
+            else switch (ability.Type)
+            {
+                case AbilityType.Fortify:
+                    ProcessFortifyCard(slot, abilityEntity, abilityGo);
+                    break;
+                case AbilityType.BloodPact:
+                    ProcessBloodPactCard(slot, abilityEntity, abilityGo);
+                    break;
+                case AbilityType.Life:
+                    ProcessLifeCard(slot, abilityEntity, abilityGo);
+                    break;
+                case AbilityType.Trade:
+                    ProcessTradeCard(slot, abilityEntity, abilityGo);
+                    break;
+                case AbilityType.Faith:
+                    ProcessFaithCard(slot, abilityEntity, abilityGo);
+                    break;
+            }
+        }
+
+        
+
 
         private void ProcessSwordCard(GameObject entityGo, GameObject slotGo)
         {
@@ -310,6 +349,72 @@ namespace DefaultNamespace
                 ResetSelectedCard();
             }
         }
+        
+        
+        
+        private void ProcessFaithCard(SlotData slot, Entity abilityEntity, GameObject abilityGo)
+        {
+            if (slot.Type == SlotType.Player)
+            {
+                EntityManager.AddComponentData(abilityEntity,new ResolveAbilityFaithData());
+                abilityGo.GetComponent<CardView>().Kill();
+                
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
+            
+        }
+
+        private void ProcessTradeCard(SlotData slot, Entity abilityEntity, GameObject abilityGo)
+        {
+            if (slot.Type != SlotType.Player && slot.Occupied == 1 &&
+                !EntityManager.HasComponent<MonsterData>(slot.Entity))
+            {
+                EntityManager.AddComponentData(abilityEntity,new ResolveAbilityTradeData());
+                EntityManager.AddComponentData(slot.Entity,new KillCardData());
+                abilityGo.GetComponent<CardView>().Kill();
+                
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
+        }
+
+        private void ProcessLifeCard(SlotData slot, Entity abilityEntity, GameObject abilityGo)
+        {
+            if (slot.Type == SlotType.Player)
+            {
+                EntityManager.AddComponentData(abilityEntity,new ResolveAbilityLIfeData());
+                abilityGo.GetComponent<CardView>().Kill();
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
+        }
+
+        private void ProcessBloodPactCard(SlotData slot, Entity abilityEntity, GameObject abilityGo)
+        {
+            if (slot.Occupied == 1 && EntityManager.HasComponent<MonsterData>(slot.Entity))
+            {
+               EntityManager.AddComponentData(abilityEntity,new ResolveAbilityBloodPaktData
+               {
+                   TargetMonster = slot.Entity
+               });
+                abilityGo.GetComponent<CardView>().Kill();
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
+        }
+        
+        
+        
+        
         
         
         

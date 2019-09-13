@@ -1,4 +1,4 @@
-using System.ComponentModel;
+
 using CCG;
 using Unity.Collections;
 using Unity.Entities;
@@ -30,7 +30,7 @@ namespace system
             
             
             
-            public void Execute(Entity entity, int index,  ref ResolveAbilityFortifyData resolveAbilityDat)
+            public void Execute(Entity entity, int index,[ReadOnly]  ref ResolveAbilityFortifyData resolveAbilityDat)
             {
                 EntityCommandBuffer.RemoveComponent<ResolveAbilityFortifyData>(index,entity);
                 Entity targetEntity = resolveAbilityDat.TargetEntity;
@@ -75,7 +75,5 @@ namespace system
         }
     }
 
-    internal class DirtyStatData
-    {
-    }
+    
 }

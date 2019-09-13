@@ -29,18 +29,28 @@
             <e p="CardSlotData.cs" t="Include" />
             <e p="DamagePlayerData.cs" t="Include" />
             <e p="DirtyData.cs" t="Include" />
+            <e p="DirtyStatData.cs" t="Include" />
             <e p="GameFinishedData.cs" t="Include" />
             <e p="HealPlayerData.cs" t="Include" />
             <e p="LootCoinsData.cs" t="Include" />
             <e p="PlayerData.cs" t="Include" />
             <e p="PostResolveCardData.cs" t="Include" />
+            <e p="ResolveAbilityBloodPaktData.cs" t="Include" />
             <e p="ResolveAbilityFortifyData.cs" t="Include" />
+            <e p="ResolveAbilityLIfeData.cs" t="Include" />
+            <e p="ResolveAbilityTradeData.cs" t="Include" />
             <e p="ResolveCardInteractionData.cs" t="Include" />
             <e p="ResolvePlayerInteractionData.cs" t="Include" />
             <e p="SetHpData.cs" t="Include" />
             <e p="SlotDataProxy.cs" t="Include" />
           </e>
           <e p="system" t="Include">
+            <e p="ability" t="Include">
+              <e p="ResolveAbilityBloodPaktSystem.cs" t="Include" />
+              <e p="ResolveAbilityFortifySystem.cs" t="Include" />
+              <e p="ResolveAbilityLifeSystem.cs" t="Include" />
+              <e p="ResolveAbilityTradeSystem.cs" t="Include" />
+            </e>
             <e p="CardCreationSystem.cs" t="Include" />
             <e p="CardDealingSystem.cs" t="Include" />
             <e p="CardShopSystem.cs" t="Include" />
@@ -50,7 +60,7 @@
             <e p="LootCoinsSystem.cs" t="Include" />
             <e p="PlayerCreationSystem.cs" t="Include" />
             <e p="PlayerInputSystem.cs" t="Include" />
-            <e p="ResolveAbilityFortifySystem.cs" t="Include" />
+            <e p="PostResolveCardSystem.cs" t="Include" />
             <e p="ResolveCoinSystem.cs" t="Include" />
             <e p="ResolveMonsterOverPlayerSystem.cs" t="Include" />
             <e p="ResolveMonsterOverShieldSystem.cs" t="Include" />
