@@ -30,7 +30,7 @@ namespace CCG
             
             
             
-            public void Execute(Entity entity, int index, ref PotionData potionData, ref StatData statData)
+            public void Execute(Entity entity, int index, [ReadOnly] ref PotionData potionData, ref StatData statData)
             {
                 EntityCommandBuffer.RemoveComponent<ResolveCardInteractionData>(index,entity);
                 EntityCommandBuffer.AddComponent(index,entity,new DirtyData());

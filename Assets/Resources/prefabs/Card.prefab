@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3895230199504119647}
   - component: {fileID: 3895230199504119640}
   - component: {fileID: 3895230199504119635}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatText: {fileID: 3895230200496415416}
   NameText: {fileID: 3895230200336947064}
-  slot: {fileID: 0}
+  Slot: {fileID: 0}
   isDisabled: 0
 --- !u!1 &3895230199878466142
 GameObject:

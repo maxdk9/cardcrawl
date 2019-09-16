@@ -22,7 +22,7 @@ namespace system
             resolveQuery = GetEntityQuery(ComponentType.ReadOnly<ResolveAbilityLIfeData>());
             playerQuery = GetEntityQuery(ComponentType.ReadOnly<PlayerData>());
             barrier = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
-            postResolveCardArchetype = EntityManager.CreateArchetype(typeof(EntityArchetype));
+            postResolveCardArchetype = EntityManager.CreateArchetype(typeof(PostResolveCardData));
             
         }
         

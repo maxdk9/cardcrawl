@@ -66,6 +66,7 @@
             <e p="ResolveMonsterOverShieldSystem.cs" t="Include" />
             <e p="ResolvePotionSystem.cs" t="Include" />
             <e p="ResolveSwordOverMonsterSystem.cs" t="Include" />
+            <e p="SlotManagementSystem.cs" t="Include" />
             <e p="SyncCoinSystem.cs" t="Include" />
             <e p="SyncPotionSystem.cs" t="Include" />
             <e p="UpdatePlayerCoinsUISystem.cs" t="Include" />

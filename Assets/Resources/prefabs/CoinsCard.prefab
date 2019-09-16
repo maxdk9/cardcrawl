@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7729271704893646970}
   - component: {fileID: 7729271704893646973}
   - component: {fileID: 7729271704893646966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CoinsCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatText: {fileID: 7729271705915272605}
   NameText: {fileID: 7729271705722280029}
-  slot: {fileID: 0}
+  Slot: {fileID: 0}
   isDisabled: 0
 --- !u!1 &7729271705307837819
 GameObject:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3512680140650132823}
   - component: {fileID: 3512680140650132816}
   - component: {fileID: 3512680140650132822}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GameFinishedPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

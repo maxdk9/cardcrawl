@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 7021676089136250974}
   - component: {fileID: 7021676089136250969}
   - component: {fileID: 7021676089136250962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AbilityCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatText: {fileID: 7021676088014489017}
   NameText: {fileID: 7021676089230897273}
-  slot: {fileID: 0}
+  Slot: {fileID: 0}
   isDisabled: 0
 --- !u!1 &7021676089230897272
 GameObject:

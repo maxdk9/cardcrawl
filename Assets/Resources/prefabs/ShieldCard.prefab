@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6774328532692874873}
   - component: {fileID: 6774328532692874878}
   - component: {fileID: 6774328532692874869}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShieldCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatText: {fileID: 6774328533714269086}
   NameText: {fileID: 6774328532984628830}
-  slot: {fileID: 0}
+  Slot: {fileID: 0}
   isDisabled: 0
 --- !u!1 &6774328532984628831
 GameObject:

@@ -109,7 +109,5 @@ namespace system
         }
     }
 
-    internal class DirtyStatData
-    {
-    }
+   
 }

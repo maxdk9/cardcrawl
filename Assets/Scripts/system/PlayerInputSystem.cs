@@ -21,9 +21,9 @@ namespace DefaultNamespace
         protected override void OnStartRunning()
         {
             mainCamera=Camera.main;
-            slotLayer = 1 << LayerMask.NameToLayer("Slot");
-            shopLayer = 1 << LayerMask.NameToLayer("Shop");
-            cardLayer = 1 << LayerMask.NameToLayer("Card");
+            slotLayer = 1 << LayerMask.NameToLayer("slot");
+            shopLayer = 1 << LayerMask.NameToLayer("shop");
+            cardLayer = 1 << LayerMask.NameToLayer("card");
         }
 
 
@@ -40,7 +40,7 @@ namespace DefaultNamespace
 
             if (Input.GetMouseButtonDown(0))
             {
-                var hits = Raycast(mousPos, Vector3.forward, slotLayer, shopLayer);
+                var hits = Raycast(mousPos, Vector3.forward, slotLayer, cardLayer);
                 var slotHit = hits.Item1;
                 var cardHit = hits.Item2;
                 if(slotHit.collider!=null&&cardHit.collider!=null&&IsCardSelectable(cardHit.collider.gameObject))
@@ -52,7 +52,7 @@ namespace DefaultNamespace
             }
             else if (Input.GetMouseButtonUp(0) && isDraggingCard)
             {
-                var hits = Raycast(mousPos, Vector3.forward, slotLayer, cardLayer);
+                var hits = Raycast(mousPos, Vector3.forward, slotLayer, shopLayer);
                 var slotHit = hits.Item1;
                 var shopHit= hits.Item2;
                 if (slotHit.collider != null)
@@ -175,9 +175,38 @@ namespace DefaultNamespace
         
 
 
-        private void ProcessSwordCard(GameObject entityGo, GameObject slotGo)
+        private void ProcessSwordCard(GameObject swordGo, GameObject slotGo)
         {
-            throw new NotImplementedException();
+            var swordEntity = swordGo.GetComponent<GameObjectEntity>().Entity;
+            var slotEntity = slotGo.GetComponent<GameObjectEntity>().Entity;
+
+            var startSlot = EntityManager.GetComponentData<CardSlotData>(swordEntity);
+            var endSlot = EntityManager.GetComponentData<SlotData>(slotEntity);
+            
+            if (startSlot.Type == SlotType.Deck &&
+                endSlot.Type != SlotType.Deck &&
+                endSlot.Type != SlotType.Player &&
+                endSlot.Occupied == 0)
+            {
+                EnterSlot(selectedCard, slotGo);
+            }
+            else if (startSlot.Type == SlotType.Bag &&
+                     (endSlot.Type == SlotType.LeftHand || endSlot.Type == SlotType.RightHand) &&
+                     endSlot.Occupied == 0)
+            {
+                EnterSlot(selectedCard, slotGo);
+            }
+            else if ((startSlot.Type == SlotType.LeftHand || startSlot.Type == SlotType.RightHand) &&
+                     endSlot.Type == SlotType.Deck &&
+                     EntityManager.HasComponent<MonsterData>(endSlot.Entity))
+            {
+                EntityManager.AddComponentData(swordEntity, new ResolveCardInteractionData());
+                EntityManager.AddComponentData(endSlot.Entity, new ResolveCardInteractionData());
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
         }
 
         private void ProcessShieldCard( GameObject slotGo)
@@ -196,14 +225,43 @@ namespace DefaultNamespace
             }
         }
 
-        private void ProcessPotionCard(GameObject entityGo, GameObject slotGo)
+        private void ProcessPotionCard(GameObject potionGo, GameObject slotGo)
         {
-            throw new NotImplementedException();
+            var slotEntity = slotGo.GetComponent<GameObjectEntity>().Entity;
+            var slot = EntityManager.GetComponentData<SlotData>(slotEntity);
+            if (slot.Type != SlotType.Deck &&
+                slot.Type != SlotType.Player &&
+                slot.Occupied == 0)
+            {
+                EnterSlot(selectedCard, slotGo);
+                if (slot.Type != SlotType.Bag)
+                {
+                    var potionEntity = potionGo.GetComponent<GameObjectEntity>().Entity;
+                    EntityManager.AddComponentData(potionEntity, new ResolveCardInteractionData());
+                }
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
         }
 
-        private void ProcessCoinCard(GameObject entityGo, GameObject slotGo)
+        private void ProcessCoinCard(GameObject coinsGo, GameObject slotGo)
         {
-            throw new NotImplementedException();
+            var slotEntity = slotGo.GetComponent<GameObjectEntity>().Entity;
+            var slot = EntityManager.GetComponentData<SlotData>(slotEntity);
+            if (slot.Type != SlotType.Deck &&
+                slot.Type != SlotType.Player &&
+                slot.Occupied == 0)
+            {
+                EnterSlot(selectedCard, slotGo);
+                var coinsEntity = coinsGo.GetComponent<GameObjectEntity>().Entity;
+                EntityManager.AddComponentData(coinsEntity, new ResolveCardInteractionData());
+            }
+            else
+            {
+                ResetSelectedCard();
+            }
         }
 
         private void ProcessMonsterCard(GameObject monsterGo, GameObject slotGo)
