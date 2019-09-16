@@ -18,8 +18,11 @@ namespace CCG
             monsterQuery = GetEntityQuery(ComponentType.ReadOnly<Transform>(),
                 ComponentType.ReadOnly<MonsterData>(),
                 ComponentType.ReadOnly<StatData>(),
-                ComponentType.ReadOnly<ResolveCardInteractionData>()
+                ComponentType.ReadOnly<ResolvePlayerInteractionData>()
             );
+            
+            
+            
 
             playerQuery = GetEntityQuery(ComponentType.ReadOnly<PlayerData>());
             damagePlayerArchetype=EntityManager.CreateArchetype(typeof(DamagePlayerData));

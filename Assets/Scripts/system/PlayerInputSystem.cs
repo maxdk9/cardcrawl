@@ -58,6 +58,7 @@ namespace DefaultNamespace
                 if (slotHit.collider != null)
                 {
                     ProcessCard(selectedCard, slotHit.collider.gameObject);
+                    
                 }
                 else if(shopHit.collider!=null&& IsCardSellable(selectedCard))
                 {
@@ -111,6 +112,7 @@ namespace DefaultNamespace
             if (EntityManager.HasComponent<MonsterData>(entity))
             {
                 ProcessMonsterCard(entityGo, slotGo);
+                
             }
             
             if (EntityManager.HasComponent<SwordData>(entity))
@@ -266,26 +268,29 @@ namespace DefaultNamespace
 
         private void ProcessMonsterCard(GameObject monsterGo, GameObject slotGo)
         {
+        
+            
             var monsterEntity = monsterGo.GetComponent<GameObjectEntity>().Entity;
-            MonsterData monsterData = EntityManager.GetComponentData<MonsterData>(monsterEntity);
             var slotEntity = slotGo.GetComponent<GameObjectEntity>().Entity;
-            SlotData slotData = EntityManager.GetComponentData<SlotData>(slotEntity);
+            var slotData = EntityManager.GetComponentData<SlotData>(slotEntity);
             if (slotData.Type != SlotType.Deck &&
                 slotData.Type != SlotType.Bag &&
                 slotData.Occupied == 1 &&
-                EntityManager.HasComponent<ShieldData>(slotEntity))
+                EntityManager.HasComponent<ShieldData>(slotData.Entity))
             {
-                EntityManager.AddComponentData(monsterEntity,new ResolveCardInteractionData());
-                EntityManager.AddComponentData(slotData.Entity,new ResolveCardInteractionData());
+                EntityManager.AddComponentData(monsterEntity, new ResolveCardInteractionData());
+                EntityManager.AddComponentData(slotData.Entity, new ResolveCardInteractionData());
             }
-            else if(slotData.Type==SlotType.Player)
+            else if (slotData.Type == SlotType.Player)
             {
-                EntityManager.AddComponentData(monsterEntity,new ResolvePlayerInteractionData());
+                EntityManager.AddComponentData(monsterEntity, new ResolvePlayerInteractionData());
             }
             else
             {
                 ResetSelectedCard();
             }
+            
+            
                
         }
         

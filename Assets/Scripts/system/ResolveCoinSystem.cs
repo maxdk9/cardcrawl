@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using CCG;
 using Unity.Collections;
 using Unity.Entities;
@@ -35,7 +36,7 @@ namespace system
             public EntityArchetype PostResolveCardArchetype;
             
             
-            public void Execute(Entity entity, int index, ref CoinsData coinsData, ref StatData statData)
+            public void Execute(Entity entity, int index, ref CoinsData coinsData,[Unity.Collections.ReadOnly] ref StatData statData)
                 {
                 EntityCommandBuffer.RemoveComponent<ResolveCardInteractionData>(index,entity);
                     EntityCommandBuffer.AddComponent(index,entity,new DirtyData());

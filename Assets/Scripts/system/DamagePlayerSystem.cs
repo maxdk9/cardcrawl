@@ -25,7 +25,7 @@ namespace DefaultNamespace
         protected override void OnUpdate()
         {
             var finalHp = -1;
-            Entities.With(playerQuery).ForEach((Entity damageEntity, ref DamagePlayerData damageData) =>
+            Entities.With(damageQuery).ForEach((Entity damageEntity, ref DamagePlayerData damageData) =>
                 {
                     var damage = damageData.Amount;
                     Entities.With(playerQuery).ForEach((Entity playerEntity, ref PlayerData playerData) =>
