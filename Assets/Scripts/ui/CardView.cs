@@ -61,8 +61,8 @@ public class CardView : MonoBehaviour
 
     private void ExitSlot()
     {
-        var entity = this.GetComponent<GameObjectEntity>().Entity;
-        var entityManager = this.GetComponent<GameObjectEntity>().EntityManager;
+        var entity = Slot.GetComponent<GameObjectEntity>().Entity;
+        var entityManager = Slot.GetComponent<GameObjectEntity>().EntityManager;
         var slotData = entityManager.GetComponentData<SlotData>(entity);
         
         entityManager.SetComponentData(entity,new SlotData

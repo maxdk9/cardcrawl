@@ -19,8 +19,8 @@ namespace system
         }
 
         protected override void OnStartRunning()
-        {
-            playerCoinsText = GameObject.Find("CoinsText").GetComponent<TextMeshPro>();
+        { 
+            playerCoinsText = GameObject.Find("CoinText").GetComponent<TextMeshPro>();
         }
 
 

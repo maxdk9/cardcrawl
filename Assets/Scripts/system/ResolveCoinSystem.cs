@@ -36,7 +36,7 @@ namespace system
             public EntityArchetype PostResolveCardArchetype;
             
             
-            public void Execute(Entity entity, int index, ref CoinsData coinsData,[Unity.Collections.ReadOnly] ref StatData statData)
+            public void Execute(Entity entity, int index, [Unity.Collections.ReadOnly] ref CoinsData coinsData, ref StatData statData)
                 {
                 EntityCommandBuffer.RemoveComponent<ResolveCardInteractionData>(index,entity);
                     EntityCommandBuffer.AddComponent(index,entity,new DirtyData());
@@ -73,6 +73,7 @@ namespace system
 
             inputDeps = job.Schedule(this, inputDeps);
             barrier.AddJobHandleForProducer(inputDeps);
+            entities.Dispose();
             return inputDeps;
         }
     }

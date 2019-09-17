@@ -164,12 +164,14 @@ namespace DefaultNamespace
             card.SetName(sourceAbility.Type.ToString());
             var cardEntity = cardGo.GetComponent<GameObjectEntity>().Entity;
             
-            EntityManager.SetComponentData(cardEntity,new CardData());
-            EntityManager.SetComponentData(cardEntity,sourceAbility);
+            EntityManager.AddComponentData(cardEntity,new CardData());
+            EntityManager.AddComponentData(cardEntity,sourceAbility);
 
             return card;
         }
 
+        
+        
 
         private CardView CreateCardWithStatView<T>(GameObject prefab, Entity sourceEntity)
         where T : struct ,IComponentData

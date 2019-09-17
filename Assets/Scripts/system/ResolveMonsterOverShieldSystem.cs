@@ -40,6 +40,7 @@ namespace DefaultNamespace
             {
                 shieldEntities.Dispose();
                 monsterEntities.Dispose();
+                return;
             }
 
 
